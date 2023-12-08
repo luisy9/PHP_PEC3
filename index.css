@@ -1,0 +1,18 @@
+table {
+    border-color: 1px black solid;
+}
+
+.btn {
+    cursor: pointer;
+    /* border-style: solid 1px black; */
+    text-decoration: none;
+    color: white;
+    background-color: grey;
+    border-radius: 5px;
+    padding: 1px 14px;
+    font-size: 17px;
+}
+
+.btn:hover {
+    color: black;
+}
