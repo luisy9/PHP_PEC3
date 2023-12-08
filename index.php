@@ -20,7 +20,6 @@ if ($res !== false) {
     }
 }
 
-
 function newOrderArray($table)
 {
     $newArray = [];
@@ -39,12 +38,74 @@ function newOrderArray($table)
     return $newArray;
 }
 
-$newTable = newOrderArray($table);
-$isAcendente = false;
+function buildTable($table)
+{
+    $newTable = newOrderArray($table);
+    echo "<table border=1>";
+    echo "<thead>";
+    foreach ($newTable[0] as $index => $element) {
+        if ($index != 'id') {
+            if ($index === 'fecha') {
+                echo "<th>$index <a href='?action=ascendente' class='btn'>Ascendete</a></th>";
+            } else {
+                echo "<th>$index</th>";
+            }
+        }
+    }
+    echo "</thead>";
+
+    echo "<tbody>";
+    foreach ($newTable as $row) {
+        echo "<tr>";
+        foreach ($row as $index => $element) {
+            if ($index === 'id') {
+                $id = $element;
+            }
+
+            if ($index != 'id') {
+                if ($index === 'nombre_del_evento') {
+                    echo "<td>";
+                    echo "<a href='post.php?id=$id'>$element</a>";
+                    echo "</td>";
+                } else if ($index === 'fecha') {
+                    echo "<td>";
+                    echo  date('d/m/Y', strtotime($element));
+                    echo "</td>";
+                } else {
+                    echo "<td>";
+                    echo "$element";
+                    echo "</td>";
+                }
+            }
+        }
+        echo "</tr>";
+    }
+    echo "</tbody>";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Redirigir para evitar la reenvío del formulari
+    if (isset($_POST['submit'])) {
+        $sql = "SELECT * FROM eventos_culturales ORDER BY RAND() LIMIT 5";
+        $res = $conect->query($sql);
+
+        if ($res !== false) {
+            while ($row = $res->fetch_assoc()) {
+                $table[] = $row;
+            }
+
+            // echo 'hola';
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit();
+        }
+    }
+}
+
 
 if (isset($_GET['action']) && $_GET['action'] === 'ascendente') {
     $isAcendente = true;
-    usort($table, 'comparar');
+    $newTable = newOrderArray($table);
+    usort($newTable, 'comparar');
 }
 
 function comparar($a, $b)
@@ -56,17 +117,7 @@ function comparar($a, $b)
     return $fechaA <=> $fechaB;
 }
 
-if (isset($_GET['action']) && $_GET['action'] === 'descendente') {
-    $isAcendente = false;
-    descendente();
-}
-
-function descendente()
-{
-}
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,60 +125,13 @@ function descendente()
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index.php</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <table border="1">
-        <thead>
-            <?php foreach ($newTable[0] as $index => $element) : ?>
+    <?php buildTable($table); ?>
 
-                <?php if ($index != 'id') : ?>
-                    <?php if ($index === 'fecha') : ?>
-                        <th><?php echo $index ?>
-                            <?php if (isset($_POST['button_order_date'])) : ?>
-                            <?php endif; ?>
-                            <?php if (!$isAcendente) : ?>
-                                <a href="?action=ascendente" class="btn">Ascendete</a>
-                            <?php elseif ($isAcendente) : ?>
-                                <a href="?action=descendente" class="btn">Descendente</a>
-                            <?php endif; ?>
-                        </th>
-                    <?php else : ?>
-                        <th><?php echo $index ?></th>
-                    <?php endif; ?>
-                <?php endif; ?>
-            <?php endforeach ?>
-        </thead>
-        <tbody>
-            <?php foreach ($newTable as $row) : ?>
-                <tr>
-                    <?php foreach ($row as $index => $element) : ?>
-                        <?php if ($index === 'id') : ?>
-                            <?php $id = $element; ?>
-                        <?php endif; ?>
-                        <?php if ($index != 'id') : ?>
-                            <?php if ($index === 'nombre_del_evento') : ?>
-                                <td>
-                                    <a href="post.php?id=<?php echo $id ?>"><?php echo $element ?></a>
-                                </td>
-                            <?php elseif ($index === 'fecha') : ?>
-                                <td>
-                                    <?= date('d/m/Y', strtotime($element)) ?>
-                                </td>
-                            <?php else : ?>
-                                <td>
-                                    <?php echo $element ?>
-                                </td>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
-    <form>
+    <form method="POST" action="index.php">
         <button type="submit" name="submit">Next</button>
     </form>
 </body>

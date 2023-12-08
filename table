@@ -1,0 +1,59 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index.php</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <table border="1">
+        <thead>
+            <?php foreach ($newTable[0] as $index => $element) : ?>
+
+                <?php if ($index != 'id') : ?>
+                    <?php if ($index === 'fecha') : ?>
+                        <th><?php echo $index ?>
+                            <?php if (isset($_POST['button_order_date'])) : ?>
+                            <?php endif; ?>
+                            <?php if (!$isAcendente) : ?>
+                                <a href="?action=ascendente" class="btn">Ascendete</a>
+                            <?php elseif ($isAcendente) : ?>
+                                <a href="?action=descendente" class="btn">Descendente</a>
+                            <?php endif; ?>
+                        </th>
+                    <?php else : ?>
+                        <th><?php echo $index ?></th>
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach ?>
+        </thead>
+        <tbody>
+            <?php foreach ($newTable as $row) : ?>
+                <tr>
+                    <?php foreach ($row as $index => $element) : ?>
+                        <?php if ($index === 'id') : ?>
+                            <?php $id = $element; ?>
+                        <?php endif; ?>
+                        <?php if ($index != 'id') : ?>
+                            <?php if ($index === 'nombre_del_evento') : ?>
+                                <td>
+                                    <a href="post.php?id=<?php echo $id ?>"><?php echo $element ?></a>
+                                </td>
+                            <?php elseif ($index === 'fecha') : ?>
+                                <td>
+                                    <?= date('d/m/Y', strtotime($element)) ?>
+                                </td>
+                            <?php else : ?>
+                                <td>
+                                    <?php echo $element ?>
+                                </td>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table> -->
