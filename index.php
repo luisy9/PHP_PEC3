@@ -137,3 +137,90 @@ function comparar($a, $b)
 </body>
 
 </html>
+
+
+<!--Codigo a probar !-->
+<?php
+// session_start();
+
+// $server_name = 'localhost';
+// $username = 'root';
+// $password = '';
+// $db = 'luis_db';
+
+// $conect = new mysqli($server_name, $username, $password, $db);
+
+// if ($conect->connect_error) {
+//     die('Conexion fallida' . mysqli_connect_error());
+// }
+
+// Función para ordenar el array por fecha
+// function comparar($a, $b)
+// {
+//     $fechaA = new DateTime($a['fecha']);
+//     $fechaB = new DateTime($b['fecha']);
+//     return $fechaA <=> $fechaB;
+// }
+
+// Función para crear un nuevo array con un orden específico
+// function newOrderArray($table)
+// {
+//     $newArray = [];
+//     foreach ($table as $e) {
+//         $newArray[] = array(
+//             'id' => $e['id'],
+//             'nombre_del_evento' => $e['nombre_del_evento'],
+//             'fecha' => $e['fecha'],
+//             'ubicacion' => $e['ubicacion'],
+//             'categoría' => $e['categoría'],
+//             'descripcion' => $e['descripcion'],
+//             'imagen' => $e['imagen'],
+//         );
+//     }
+
+//     return $newArray;
+// }
+
+// Lógica para obtener los eventos culturales al cargar la página
+// if (!isset($_SESSION['table'])) {
+//     $sql = "SELECT * FROM eventos_culturales ORDER BY RAND() LIMIT 5";
+//     $res = $conect->query($sql);
+
+//     if ($res !== false) {
+//         while ($row = $res->fetch_assoc()) {
+//             $table[] = $row;
+//         }
+
+        // Guardar la tabla en la sesión
+        // $_SESSION['table'] = newOrderArray($table);
+    // }
+// } else {
+    // Si ya existe una tabla en la sesión, usar esa
+    // $table = $_SESSION['table'];
+
+    // Verificar si se hace clic en el enlace de 'ascendente'
+    // if (isset($_GET['action']) && $_GET['action'] === 'ascendente') {
+        // Ordenar el array por fecha
+        // usort($table, 'comparar');
+    // }
+// }
+?>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body> -->
+    <!-- <?php buildTable($table); ?> -->
+
+    <!-- <form method="POST" action="index.php">
+        <button type="submit" name="submit">Next</button>
+    </form>
+</body>
+
+</html> -->
