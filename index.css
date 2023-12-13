@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
 table {
     border-color: 1px black solid;
 }
@@ -15,4 +21,69 @@ table {
 
 .btn:hover {
     color: black;
+}
+
+.navbar {
+    background-color: rgba(2, 1, 2, 0.829);
+    margin: 0;
+    padding: 20px 10rem;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 0;
+    text-decoration: none;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.div_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.div_control_input {
+    padding: 1rem;
+}
+
+.div_control_button {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    padding: 7px;
+    font-size: 1rem;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #012FAD;
+    color: white;
+}
+
+.button:hover {
+    background-color: #012fadb4;
+}
+
+h2 {
+    text-align: center;
 }

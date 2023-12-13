@@ -1,4 +1,6 @@
 <?php
+// include 'navbar/navbar.php';
+
 $server_name = 'localhost';
 $username = 'root';
 $password = '';
