@@ -13,6 +13,7 @@ if ($conect->connect_error) {
     die('Conexion fallida' . $conect->connect_error);
 }
 
+$camposIncorrectos = false;
 
 if (isset($_POST['add_user'])) {
     if (!empty($_POST['nombre']) && !empty($_POST['password'])) {
@@ -31,7 +32,7 @@ if (isset($_POST['add_user'])) {
             $_SESSION['user'] = $usuarioBD['nombre'];
             header('Location: index.php');
         } else {
-            echo "";
+            $camposIncorrectos = true;
         }
     } else {
         echo 'falta un campo';
@@ -56,6 +57,11 @@ if (isset($_POST['add_user'])) {
 <body>
     <div class="div_form">
         <form method="POST">
+            <?php if ($camposIncorrectos) : ?>
+                <div class="error_div">
+                    <h2 class="h2_error" style="color: red;">Los campos no son correctos</h2>
+                </div>
+            <?php endif; ?>
             <h2>Login</h2>
             <div class="div_control_input">
                 <label for="nombre">Nombre:</label>

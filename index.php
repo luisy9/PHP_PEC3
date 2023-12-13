@@ -1,16 +1,29 @@
-<?php include 'includes/header.php'; ?>
-
 <body>
-    <?php include 'includes/navbar.php'; ?>
-
     <?php
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-    $path = "pages/{$page}.php";
+    if ($page === 'post.php' || $page === 'editEvent.php') {
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        if (!is_numeric($id) || $id <= 0) {
+            // ID no válido, manejar el error apropiadamente
+            echo "ID no válido";
+            exit;
+        }
 
-    if (file_exists($path)) {
-        include $path;
+        // Incluye post.php y pasa el ID
+        include "pages/{$page}";
     } else {
-        echo "Página no encontrada.";
+        $path = "pages/{$page}.php";
+        $isApiEventsPage = strpos($path, 'api/events/index.php') !== false;
+
+        if (!$isApiEventsPage) {
+            include 'includes/navbar.php';
+        }
+
+        if (file_exists($path)) {
+            include $path;
+        } else {
+            echo "Página no encontrada.";
+        }
     }
     ?>
 </body>

@@ -179,21 +179,23 @@ function buildTable($table, $isHomePage = false)
             }
 
             if ($index != 'id') {
-                if ($_SERVER['PHP_SELF'] == '/index.php') {
+                if (basename($_SERVER['PHP_SELF']) == '/index.php') {
                     echo $element;
                 } else {
                     if ($index === 'nombre_del_evento') {
                         echo "<td>";
-                        echo "<a href='post.php?id=$id'>$element</a>";
+                        echo "<a href='index.php?page=post.php&id=$id'>{$element}</a>";
                         echo "</td>";
                     } else if ($index === 'fecha') {
                         echo "<td>";
                         echo  date('d/m/Y', strtotime($element));
                         echo "</td>";
-                    } else {
+                    } else if ($index === 'imagen') {
                         echo "<td>";
-                        echo "$element";
+                        echo "<img src='img/$element' alt='Imagen de la bd' style=width:200px>";
                         echo "</td>";
+                    } else {
+                        echo "<td>$element</td>";
                     }
                 }
             }
