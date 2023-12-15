@@ -2,9 +2,9 @@
 // include 'navbar/navbar.php';
 
 $server_name = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'luis_db';
+$username = 'lde_harop';
+$password = 'QlX0OGOz';
+$db = 'lde_harop';
 
 
 $conect = new mysqli($server_name, $username, $password, $db);
@@ -12,6 +12,8 @@ $conect = new mysqli($server_name, $username, $password, $db);
 if ($conect->connect_error) {
     die('Conexion fallida' . mysqli_connect_error());
 }
+
+$conect->set_charset("utf8mb4");
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -79,7 +81,7 @@ function newOrderArray($table)
             'nombre_del_evento' => $e['nombre_del_evento'],
             'fecha' => $e['fecha'],
             'ubicacion' => $e['ubicacion'],
-            'categoría' => $e['categoría'],
+            'categoría' => $e['categoria'],
             'descripcion' => $e['descripcion'],
             'imagen' => $e['imagen'],
         );

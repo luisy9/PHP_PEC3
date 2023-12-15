@@ -2,21 +2,19 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-// include 'navbar/navbar.php';
-
 $server_name = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'luis_db';
+$username = 'lde_harop';
+$password = 'QlX0OGOz';
+$db = 'lde_harop';
+
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 
-// $server_name = 'eimtcms2.uoclabs.uoc.es/bbdd/';
-// $username = 'lde_harop';
-// $password = 'QlX0OGOz';
+// $server_name = 'localhost';
+// $username = 'root';
+// $password = '';
 // $db = 'lde_harop';
 // $port = 3306;
 
@@ -25,6 +23,8 @@ $conect = new mysqli($server_name, $username, $password, $db);
 if ($conect->connect_error) {
     die('Conexion fallida' . $conect->connect_error);
 }
+
+$conect->set_charset("utf8mb4");
 
 $cambio = false;
 
@@ -124,7 +124,7 @@ function newOrderArray($table)
             'nombre_del_evento' => $e['nombre_del_evento'],
             'fecha' => $e['fecha'],
             'ubicacion' => $e['ubicacion'],
-            'categoría' => $e['categoría'],
+            'categoria' => $e['categoria'],
             'descripcion' => $e['descripcion'],
             'imagen' => $e['imagen'],
         );

@@ -1,11 +1,14 @@
 <?php
 
 // session_start();
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
 
 $server_name = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'luis_db';
+$username = 'lde_harop';
+$password = 'QlX0OGOz';
+$db = 'lde_harop';
 
 $conect = new mysqli($server_name, $username, $password, $db);
 
@@ -13,6 +16,7 @@ if ($conect->connect_error) {
     die('Conexion fallida' . mysqli_connect_error());
 }
 
+$conect->set_charset("utf8mb4");
 
 $sql_select = "SELECT * FROM eventos_culturales";
 $res = $conect->query($sql_select);
@@ -33,7 +37,7 @@ function newOrderArray($table)
             'nombre_del_evento' => $e['nombre_del_evento'],
             'fecha' => $e['fecha'],
             'ubicacion' => $e['ubicacion'],
-            'categoría' => $e['categoría'],
+            'categoría' => $e['categoria'],
             'descripcion' => $e['descripcion'],
             'imagen' => $e['imagen'],
         );

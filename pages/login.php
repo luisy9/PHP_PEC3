@@ -3,9 +3,9 @@
 
 
 $server_name = 'localhost';
-$username = 'root';
-$password = '';
-$db = 'luis_db';
+$username = 'lde_harop';
+$password = 'QlX0OGOz';
+$db = 'lde_harop';
 
 $conect = new mysqli($server_name, $username, $password, $db);
 
@@ -59,7 +59,7 @@ if (isset($_POST['add_user'])) {
         <form method="POST">
             <?php if ($camposIncorrectos) : ?>
                 <div class="error_div">
-                    <h2 class="h2_error" style="color: red;">Los campos no son correctos</h2>
+                    <h2 class="h2_error" style="color: red;">La contraseña no es correcta</h2>
                 </div>
             <?php endif; ?>
             <h2>Login</h2>

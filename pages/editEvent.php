@@ -1,20 +1,24 @@
 <?php
-session_start();
+include 'includes/navbar.php';
+// session_start();
 if (isset($_SESSION['user'])) {
     if (isset($_GET['id'])) {
+        $user = $_SESSION['user'];
         $id = $_GET['id'];
 
 
         $server_name = 'localhost';
-        $username = 'root';
-        $password = '';
-        $db = 'luis_db';
+        $username = 'lde_harop';
+        $password = 'QlX0OGOz';
+        $db = 'lde_harop';
 
         $conect = new mysqli($server_name, $username, $password, $db);
 
         if ($conect->connect_error) {
-            die('Conexion fallida' . $conect->connect_error);
+            die('Conexion fallida' . mysqli_connect_error());
         }
+
+        $conect->set_charset("utf8mb4");
 
         $query = "SELECT * FROM eventos_culturales WHERE id=$id";
 
@@ -24,35 +28,20 @@ if (isset($_SESSION['user'])) {
         }
 
         if (isset($_POST['update_event'])) {
-            echo 'ejecutadooo';
             $id = $_POST['id'];
             $nombre_del_evento = $_POST['nombre_del_evento'];
             $descripcion = $_POST['descripcion'];
             $ubicacion = $_POST['ubicacion'];
             $imagen = $_POST['imagen'];
-            $categoría = $_POST['categoría'];
+            $categoria = $_POST['categoria'];
             $fecha = $_POST['fecha'];
             $hora = $_POST['hora'];
 
-            echo $id;
-            echo $nombre_del_evento;
-            echo $descripcion;
-            echo $ubicacion;
-            echo $imagen;
-            echo $categoría;
-            echo $fecha;
-            echo $hora;
-
-            $update = "UPDATE eventos_culturales SET nombre_del_evento='$nombre_del_evento', descripcion='$descripcion', ubicacion='$ubicacion', imagen='$imagen', categoría='$categoría', fecha='$fecha', hora='$hora' WHERE id='$id'";
+            $update = "UPDATE eventos_culturales SET nombre_del_evento='$nombre_del_evento', descripcion='$descripcion', ubicacion='$ubicacion', imagen='$imagen', categoria='$categoria', fecha='$fecha', hora='$hora' WHERE id='$id'";
             $res = $conect->query($update);
-
-            if (!$res) {
-                die('Error en la actualización: ' . $conect->error);
-            }
-
             // Redirige después de la actualización
-            header("Location: index.php?page=events");
-            exit();
+            header("Location: index.php");
+            exit;
         }
 
 
@@ -76,7 +65,7 @@ if (isset($_SESSION['user'])) {
                             echo "<label for='$index'>$index:</label>";
                             echo "<input type='date' class='' name='$index' id='$index' value='$date' />";
                             echo "</div>";
-                        } else if($index != 'hora') {
+                        } else if ($index != 'hora') {
                             echo "<div class='div_control_input'>";
                             echo "<label for='$index'>$index:</label>";
                             echo "<input type='text' class='' name='$index' id='$index' value='$element' />";
@@ -91,8 +80,6 @@ if (isset($_SESSION['user'])) {
             echo "</form>";
             echo "</div>";
         }
-
-        buildForm($table);
     }
 } else {
     echo "no estas loget";
@@ -112,8 +99,13 @@ if (isset($_SESSION['user'])) {
     <link href="index.css" rel="stylesheet" />
 </head>
 
-<body style="display: flex; justify-content:center;">
-
+<body>
+    <?php if (isset($user)) : ?>
+        <h1>Hola <?php echo $user ?></h1>
+    <?php endif; ?>
+    <div style="display: flex; justify-content:center;">
+        <?php buildForm($table) ?>
+    </div>
 </body>
 
 </html>
